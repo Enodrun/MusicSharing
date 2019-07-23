@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.lee.mapper.LikeMapper">
+	    
+	    <!--添加收藏-->
+	    <insert id="addLike" parameterType="Like" >
+	        insert into t_user_music_like(fk_user_id,fk_music_id) values(#{fk_user_id},#{fk_music_id})    
+	    </insert>
+	    
+	    <!--删除收藏-->
+	    <insert id="disLike" parameterType="Like" >
+	        delete from t_user_music_like where fk_user_id=#{fk_user_id} and fk_music_id=#{fk_music_id}
+	    </insert>
+	    
+	    <!-- 某个人的收藏歌曲列表 -->
+	    <select id="listLikeByUser" resultType="Like">
+	        select * from t_user_music_like where fk_user_id=#{fk_user_id} ORDER BY like_id DESC
+	    </select>
+	    
+	    <!-- 某首音乐的收藏用户列表id -->
+	    <select id="listLikeByMusic" resultType="Like">
+	        select * from t_user_music_like where fk_music_id=#{fk_music_id}      
+	    </select>
+	    
+	    <!-- 根据fk_music_id和fk_user_id查询歌曲是否已被收藏 -->
+	    <select id="confirmLike" resultType="Like">
+	        select * from t_user_music_like where fk_music_id=#{fk_music_id} and fk_user_id=#{fk_user_id}      
+	    </select>
+	    
+	    <!-- 查询某首音乐的收藏总数 -->
+	    <select id="totalLikeByMusicId" resultType="int">
+	        select count(*) from t_user_music_like where fk_music_id=#{fk_music_id}
+	    </select>	
+	    
+	</mapper>
+

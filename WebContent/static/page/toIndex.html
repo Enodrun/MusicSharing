@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>跳转回上传歌曲页面</title>
+<script>
+    /* window.location = "http://localhost:8080/MusicSharing/static/page/sound.html"; */
+</script>
+</head>
+<body>
+<% String msg= request.getAttribute("msg");%>
+<h1>hello:上传成功</h1>
+
+</body>
+<script type="text/javascript">
+	if (<%=msg%>) {
+		if (window.confirm("上传成功，返回首页请确认")) {
+			window.location.href="../index.html"
+		}else{
+			window.location.href="上传音乐.html"
+		}
+	}
+</script>
+</html>

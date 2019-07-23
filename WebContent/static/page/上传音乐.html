@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>音乐上传</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<script type="text/javascript" src="../UI/js/jquery/2.0.0/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../UI/css/bootstrap/3.3.6/bootstrap.min.css">
+	<script type="text/javascript" src="../UI/js/bootstrap/3.3.6/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/whole.css">
+</head>
+<body id="body" style="background-image: url('../UI/background/b12.jpg');background-size: cover;">
+	<div>
+		<!-- 上传音乐 -->
+		<div id="uploadMusicContent">
+			<form action="/MusicSharing/sendMusic" method="Post" enctype="multipart/form-data" id="allInfo" >
+			<span class="text-primary label" style="margin-bottom:5px">音乐标题</span>
+				<input type="text" class="form-control tansparency"  style="margin-top:10px " readonly="readonly" placeholder="上传音乐文件后自动生成"  id="name" name="name">
+			<input type="text" style="display: none" name="fk_user_id" id="fk_user_id" value="">		
+			<span class="text-primary label" style=" float: left;margin-top: 10px">音乐封面</span>
+				<input class="form-control tansparency" type="file" accept="image/*" id="picture" name="picture" onchange="showPicture(this)">
+					<div class="img-thumbnail tansparency" style="width: 100%;height: 160px;margin-top:20px;border:1px solid white;text-align: center" >
+						<img src="../images/符号＋.jpg" width="150px" height="150px" id="uploadPictureArea">
+					</div>
+			<div style="clear: right;"></div>
+			<span class="text-primary label" style=" float: left;margin-top:10px">音乐文件</span>
+				<input class="form-control tansparency" style="border: 2px solid white" type="file" accept="audio/*" id="music" name="music" onchange="showName(this)"><br>
+				
+			<span class="text-primary label" >心情分享</span><br>
+				<textarea class="form-control tansparency" id="words" name="words" rows="3" style="margin-top:10px "></textarea>
+				<br>
+			<input  class="btn btn-primary tansparency" type="submit" value="确定" style="float: right;width:100px;" onclick="">
+			<input  class="btn btn-default tansparency" type="button" value="毕设演示" style="float: right;width:100px;" onclick="test()">					
+			</form>
+		</div>
+		<div style="position: absolute;bottom:0;margin-bottom: 30px;width: 100%">
+			<audio id="uploadAudio" style="position:absolute;width:100%;height:30px;" controls="controls"></audio>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../js/service/music.js"></script>
+<script type="text/javascript">
+	/* sessionStorage.setItem("user_id",38)//假装已登录放入token值方便测试 */
+
+	var area= document.getElementById("fk_user_id")
+	var temp=sessionStorage.getItem("user_id");
+	area.value=parseInt(temp);
+	console.log("temp类型："+(typeof temp)+"|area类型："+(typeof area.value))
+	var res=area.value;
+	console.log("show:"+res+"传到后台的类型是"+(typeof res))
+	
+	function test() {
+		var words=document.getElementById("words")
+		words.value=null;
+		words.value="这首音乐是广东海洋大学信管专业的一位同学所作，编曲、填词、演唱皆个人独立完成，其音乐风格属于民谣向，具有很强的"
+					+"抒情意味。海大被誉为是一所天空之城，天空之城不仅有晚霞，也有星河，曲作者已经毕业一年，大概当时演唱这首歌曲的时候"
+					+",作者本人也在没有空调的夏夜，当时被热醒了不禁想起了校园的点滴吧，歌曲很好听，分享给大家，感兴趣的同学可以去网易云音乐"
+					+"下载收听。"
+	}
+</script>
+</html>

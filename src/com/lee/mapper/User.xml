@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.lee.mapper.UserMapper">
+	    
+    <!-- 用户注册 -->
+	    <!--增加用户，name,password不为空-->
+	    <insert id="addUser" parameterType="User" >
+	        insert into t_user(name, password,nick_name,head_picture,mail) values(#{name},#{password},#{nick_name},#{head_picture},#{mail})    
+	    </insert>
+	    <!-- 根据账号查询用户名是否存在 -->
+	    <select id="selectUserByName" resultType="User">
+	        select * from t_user where name=#{name}      
+	    </select>
+	    
+	<!-- 用户登录 -->
+		<!-- 根据账号密码查询用户是否已注册 -->
+	    <select id="selectUserByNameAndPassword" resultType="User">
+	        select * from t_user where name=#{name} and password=#{password}      
+	    </select>	    
+	    <!-- 删除 -->
+	    <delete id="deleteUser" parameterType="User" >
+	        delete from t_user where user_id= #{user_id}   
+	    </delete>
+	    
+	    <select id="getUser" parameterType="int" resultType="User">
+	        select * from  t_user  where user_id= #{user_id}    
+	    </select>
+	    
+	    <select id="getUserInfo" parameterType="int" resultType="User">
+	        select user_id,name,nick_name,head_picture,mail from  t_user  where user_id= #{user_id}    
+	    </select>
+
+	    <update id="updateUser" parameterType="User">
+	        update t_user set nick_name=#{nick_name},head_picture=#{head_picture},mail=#{mail} where user_id=#{user_id}    
+	    </update>
+	    
+	    <select id="listUser" resultType="User">
+	        select * from  t_user order by user_id desc     
+	    </select>
+	    
+	    <select id="listUserByPage" resultType="User">
+	        select * from   t_user      
+	        <if test="start!=null and count!=null">
+                    limit #{start},#{count}
+            </if>
+            
+	    </select>
+	    <select id="totalUser" resultType="int">
+	        select count(*) from   t_user      
+	    </select>	    	    
+	</mapper>
+

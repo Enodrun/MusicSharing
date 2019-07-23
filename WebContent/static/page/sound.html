@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Music In Time</title><!-- 点播收听页面 -->
+	<meta charset="utf-8">
+	<script type="text/javascript" src="../UI/js/jquery/2.0.0/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../UI/css/bootstrap/3.3.6/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/whole.css">
+	<script type="text/javascript" src="../UI/js/bootstrap/3.3.6/bootstrap.min.js"></script>
+	
+</head>
+<style>
+	#smsLogin{
+		position: absolute;z-index: 1001;background-color: rgb(255,255,255,1);text-align: center;padding: 20px;
+	}
+	#smsBody{
+		position:absolute;margin-top:-10px;width:100%;height:100%;background-image:url('../UI/background/b2.jpg');background-size: cover;
+	}
+	#smsModel{
+		position: absolute;width: 100%;height: 100%;z-index: 1000;background-color: rgb(139,0,0,0.2);display:none;
+	}
+	#smsLogin{border-radius: 20px;}
+	#smsLyric{position: absolute;background-color: rgb(0,0,0,0.5);color: white;text-align: center;overflow-y: scroll;scrollbar-highlight-color:red;}
+	#smsEdit{position: absolute;background-color: rgb(0,0,0,0.8);color: white;}
+
+</style>
+<body >
+	<div id="smsBody">
+		<div id="smsLyric" style="display: none;background-color: rgb(0,0,0,0.5);">
+			<button onclick="closeSmsLyric();" class="btn btn-primary" style="width: 100%">close</button>
+			<h5 id="title" style="background-color: rgb(0,0,0,0.5);"></h5>
+			<div id="lyricAreaScroll" style="background-color: rgb(0,0,0,0.5);">
+				<p></p>
+			</div>
+		</div>
+		<div id="smsEdit" style="display: none;background-color: rgb(0,0,0,0.5);">
+			<div><button onclick="closeSmsEdit();"  class="btn btn-primary" style="width: 100%">close</button></div>
+			<div style="width: 100%;height: 10%"><!-- 头部信息 -->
+				<span >To:</span><span id="receive"></span>
+				<span>From:</span><span id="send"></span>
+			</div>
+			<div style="width: 100%;height: 40%;background-color: rgb(0,0,0,0.5);"><!-- words区域 -->
+				<div id="wordsArea" style="text-indent:2em;overflow: scroll;height: 100%;background-color: rgb(0,0,0,0.8);"></div>
+			</div>
+			<div style="width: 100%;height: 40%;background-color: rgb(0,0,0,0.5);"><!-- 回信留言 -->
+				<h6 style="text-align: center">回信留言</h6>
+				<div style="width: 100%;height: 80%"><textarea id="letter" rows="4" cols="10" style="width: 100%;height:100%;background-color: transparent;" ></textarea></div>
+				<div style="widows: 100%;height: 20%"><button class="btn btn-info" style="width: 100%;height: 100%" id="callBack" onclick="callBack();">发送留言</button></div>
+			</div>
+		</div>
+		<div style="position: absolute;bottom: 0px;width: 100%">
+			<audio style="width: 100%;height: 30px" src="../UI/mp3/Nilotpala - Дорога Перемен.mp3" autoplay="autoplay" autoPlay="autoplay" controls="controls" loop="loop" id="smsPlay" ontimeupdate="changeLyricCss()">浏览器不支持音乐播放</audio>
+		</div>
+		<div style="position: absolute;top: 0px;width: 100%;display: none;" id="vipControl">
+			<button class="btn btn-primary" onclick="share()">分享</button>
+			<!-- <button class="btn btn-primary" onclick="sendMassage()" disabled="disabled">短信</button> -->
+			<button class="btn btn-primary" onclick="openSmsLyric(600,550);showLyric()">歌词</button>
+			<button class="btn btn-primary" onclick="gotoLyric(this.name)" name="" id="gotoLyric">前往歌词编辑</button>
+			<button class="btn btn-primary" onclick="openSmsEdit(600,400)">留言板</button>
+			<div style="position: absolute;z-index:10000;top: 50px;left: 50px"><img id="qrcode" src=""></div>
+		</div>
+		<div style="position: absolute;top: 0px;width: 100%;display: none;" id="listenerControl">
+			<button class="btn btn-primary" onclick="share2()">分享</button>
+			<!-- <button class="btn btn-primary" onclick="sendMassage()" disabled="disabled">短信</button> -->
+			<button class="btn btn-primary" onclick="openSmsLyric(600,550);showLyric()">歌词</button>
+			<button class="btn btn-primary" onclick="openSmsEdit(600,400)">留言板</button>
+			<div style="position: absolute;z-index:10000;top: 50px;left: 50px"><img id="qrcode2" src=""></div>
+		</div>
+	</div>
+	<!-- 模态登录框 -->
+		<div id="smsModel">
+			<div id="smsLogin" >
+				<h3>请输入登录口令</h3><br>
+				<input id="command" type="text" class="form-control" style="width: 100%;" placeholder="如：波罗波罗密"><br>
+				<button class="btn btn-primary" style="width: 100%" onclick="selectSmsMusicBySmsIdAndCommandService(document.getElementById('command').value)">进入</button>
+			</div>
+		</div>
+</body>
+	<script type="text/javascript" src="../js/service/smsMusicListen.js"></script>
+	<script type="text/javascript" src="../js/controller/smsMusic.js"></script>
+	<script type="text/javascript" src="../js/controller/lyric.js"></script>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Music In Time</title><!-- 点播收听页面 -->
+	<meta charset="utf-8">
+	<script type="text/javascript" src="../UI/js/jquery/2.0.0/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../UI/css/bootstrap/3.3.6/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/whole.css">
+	<script type="text/javascript" src="../UI/js/bootstrap/3.3.6/bootstrap.min.js"></script>
+	
+</head>
+<style>
+	body{
+		width:100%;height:100%;background-image:url('../UI/background/b2.jpg');background-size: cover;
+		text-align: center;color: white;
+	}
+	.t{width: 10%;color:white;text-align:center;}/* 时间点样式 */
+	.c{width: 80%;color:white;text-align: center;}/* 歌词内容样式 */
+	.d{width: 10%;text-align: center;}/* 删除样式 */
+	input{background-color: rgb(0,0,0,0);border:none;border-bottom:1px solid gray;text-align:center;width: 100%;padding: 10px}
+</style>
+<body >
+	
+		<div id="smsLyric" style="display:block;">
+			<form action="#" id="myform" >
+				<table style="width: 100%">
+					<thead>
+						<tr><td colspan="3" style="background-color: black;"><span id="title">歌曲标题</span></td></tr>
+						<tr>
+							<td class="t">时间点</td><td class="c">歌词</td><td class="d">操作</td>
+						</tr>
+					</thead>
+						
+						<tbody id="lyric">
+							
+						</tbody>
+								
+				</table>
+			</form>	
+		</div>
+		
+		
+		<div style="position: absolute;bottom: 0px;width: 100%">
+			<audio style="width: 100%;height: 30px" src="../UI/mp3/Nilotpala - Дорога Перемен.mp3" controls="controls" id="music" name="">浏览器不支持音乐播放</audio><!-- name为歌曲id -->
+		</div>
+		
+		
+		<div style="position: absolute;top: 5px;width: 100%;" id="vipControl;cellspadding:30px;">
+			<button class="btn btn-primary" onclick="document.getElementById('music').pause()">暂停</button>
+			<button class="btn btn-primary" onclick="document.getElementById('music').play()">开始</button>
+			<button class="btn btn-primary" onclick="getCurrentTime(document.getElementById('music'))">截取时间戳</button>
+			<button class="btn btn-primary" onclick="sendLyric()">提交</button>
+			<button class="btn btn-default" onclick="test()">作品演示</button>
+		</div>
+	
+</body>
+	<script type="text/javascript" src="../js/controller/lyric.js"></script>
+	<script type="text/javascript" src="../js/service/lyric.js"></script>
+	<script type="text/javascript">
+	var s=0;
+	var time=[3,7,12,21,27,33,38,43,48,54,60,65,69,75,80,86,91,97,101,110,152,157,163,168,174,179,184,189,195,199]
+	var content=["作曲 : DebraJohn","作词 : DebraJohn","吉他编曲：余永黎","你我躲藏在六月的乌云背后","渴望倾泻 或几声低吼","是南方夏季的雷 沉闷 困惑","一声略过 却万里晴空","嗤笑我们在喧杂中太过沉默",
+		"原地踟蹰 有过多思索","可知我感情赤裸 坚韧 脆弱","思绪婆娑 也无惧心魔","怕无人能懂 是徒劳的焦灼","一笑而过 孤独的你我","请放开紧握 在手里的气球","任它颠簸 自由降落",
+		"我曾经坠入 梦中无垠的太空","迷失在 星云的漩涡","在陨石交错 散落 寂寞 宇宙","跌跌撞撞 却孤勇执着","(吉他solo)","怕无人能懂 是徒劳的焦灼","一笑而过 偏执的你我",
+		"独行在沙漠 看见一片绿洲","涸辙之中 听淅淅雨落","虽知我感情赤裸 坚韧 脆弱","思绪婆娑 却无惧心魔","在陨石交错 散落 寂寞 宇宙","跌跌撞撞 还孤勇执着","跌跌撞撞 还孤勇执着",
+		"还孤勇执着"]
+	function test() {
+		$("#lyric").empty();
+		/* alert(time.length+"-"+content.length); */
+		for (var i = 0; i < time.length; i++) {
+			demo(i);
+		}
+	}
+	
+	function demo(i){	
+		s=s+1;
+		var t="t"+s;
+		var l="l"+s;
+		// alert(t[from+1]);
+		if (s>100) {alert("最多只能插入100条歌词");return}
+		var html="<tr><td class='t'><input type='text' readonly='true' value=\""+time[i]+"\" name=\""+t+"\"></td>"
+				+"<td class='c'><input type='text' name="+l+" value=\""+content[i]+"\"></td><td><a class='d' href='#' onclick='this.parentNode.parentNode.innerHTML=null'>取消</a></td></tr>"
+		// var lyric = document.getElementById("lyric")
+		$("#lyric").append(html)
+		// return time;
+	}
+	</script>
+</html>

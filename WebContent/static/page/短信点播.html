@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>短信点播</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<script type="text/javascript" src="../UI/js/jquery/2.0.0/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../UI/css/bootstrap/3.3.6/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/whole.css">
+	<script type="text/javascript" src="../UI/js/bootstrap/3.3.6/bootstrap.min.js"></script>
+	<style type="text/css">
+		input{
+			background-color: rgb(0,0,0,0);
+			border: none;
+			width: 100%;
+			padding: 5px;
+		}
+		textarea {
+			background-color: rgb(0,0,0,0);
+			width: 100%;
+			font-size: 16px;
+			padding: 5px;
+		}
+		.fileButton{
+			background-color: rgb(0,0,0,0);
+			width:200px;
+			color:white;
+		}
+		
+		table{position:inherit;top:0px;left:0px;border: none;background-color: rgb(0,0,0,0.5);color:white;font-size: 16px;text-align: left;width: 100%}
+		.l{background-color:rgb(0,0,0,0);width: 20%;padding: 5px;}
+		.r{width: 80%;padding: 5px;}
+	</style>
+
+</head>
+<body id="smsContentArea" style="background-image: url(../UI/background/b3.jpg);background-size: cover">
+	<div style="position: absolute;left:0px;top:0px;width:100%;height:100%;">
+			<form action="/MusicSharing/sendSmsMusic" method="post" enctype="multipart/form-data" >
+				<input class="fileButton" type="file" class="form-control" id="picture" name="picture" accept="image/*" onchange="showPicture(this)"><p style="color:white;font-size: 20px;margin-left: 30px">点击此处上传背景图片</p>
+					
+					<div id="letterArea">
+						<input type="text" style="display: none" id="temp_user_id" name="temp_user_id" value="">
+						<input type="text" style="display: none" id="url" name="url" value="">
+						<table>
+							<tfoot>
+								<tr><td colspan="2">
+									<input class="btn btn-primary" style="width: 79%;" type="submit" value="上传">
+									<input class="btn btn-default" style="width: 20%;" type="button" value="毕设演示" onclick="test()">
+								</td></tr>
+							</tfoot>
+							<tbody>
+								<tr>
+									<td class="l">音乐标题</td><td class="r"><input type="text"  id="title" name="title"></td>
+								</tr>
+								<tr>
+									<td class="l">收听口令</td><td class="r"><input type="text"  id="command" name="command" placeholder="对方输入口令进入观看页面"></td>
+								</tr>
+								<tr>
+									<td class="l">发件人</td><td class="r"><input type="text" id="send" name="send" placeholder="取一个有趣的名字让Ta知道你吧"></td>
+								</tr>
+								<tr>
+									<td class="l">收件人</td><td class="r"><input type="text" id="receive" name="receive" placeholder="你希望怎么称呼对方呢"></td>
+								</tr>
+								<tr>
+									<td class="l">只言片语</td><td></td>
+								</tr>
+								<tr>
+									<td colspan="2"><textarea style="width: 100%;" id="words" name="words" rows="15" cols="40"></textarea></td>
+								</tr>
+							</tbody>
+						</table>						
+					</div>
+					<div style="position: absolute;bottom:0;width:100%;">
+						<input class="fileButton" type="file" id="music" name="music" accept="audio/*" onchange="showName(this)"><p style="color:white;font-size: 20px;margin-left: 30px;width: 250px" id="name">点击此处选取点播的音乐</p>
+						<audio src="" controls="controls" autoplay="autoplay" style="width:100%;height:30px" id="uploadAudio"></audio>
+					</div>
+			</form>
+	</div>
+</body>
+<script type="text/javascript" src="../js/service/smsMusic.js"></script>
+<script type="text/javascript">
+	/* sessionStorage.setItem("user_id",39)//假装已登录放入token值方便测试 */
+
+	var user_id=sessionStorage.getItem("user_id")
+	var area=document.getElementById("temp_user_id")
+	area.value=user_id
+	
+	var url=document.getElementById("url")
+	url.value=window.location.href
+	console.log("url.value="+url.value)
+	
+	function test() {
+		var words=document.getElementById("words")
+		var command=document.getElementById("command")
+		var send=document.getElementById("send")
+		var receive=document.getElementById("receive")
+	    words.value=null;
+		command.value=null;
+		send.value=null;
+		receive.value=null;
+		command.value="星河六月";
+		send.value="李国超";
+		receive.value="某人";
+		words.value="送你一首《星河六月》~";
+	}
+</script>
+</html>

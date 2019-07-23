@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.lee.mapper.SmsMusicMapper">
+	    
+	    <!-- 上传音乐和填写信息 -->
+	    <insert id="addSmsMusic" parameterType="SmsMusic" >
+	        insert into t_sms_music values(null,#{fk_user_id},#{tel},#{command},now(),#{letter},#{title},#{send},#{receive},#{receive_tel},#{music_path},#{picture_path},#{wish},#{words},#{url})    
+	    </insert>
+	    
+	    <!-- 个人音乐列表我的点播 -->
+	    <select id="listSmsMusic" parameterType="User" resultType="SmsMusic">
+	        select * from t_sms_music where fk_user_id=#{user_id} order by sms_id desc
+	    </select>
+	    
+	    <!-- 根据权限手机+观看口令 -->
+	    <select id="selectSmsMusicByTelAndCommand" resultType="SmsMusic">
+	        select * from t_sms_music where sms_id=#{sms_id} and receive_tel=#{receive_tel} and command=#{command}      
+	    </select>
+	    
+	    <!-- sms_id+观看口令 -->
+	    <select id="selectSmsMusicBySmsIdAndCommand" resultType="SmsMusic">
+	        select * from t_sms_music where sms_id=#{sms_id} and command=#{command}      
+	    </select>
+	    
+	     <!-- sms_id -->
+	    <select id="selectSmsMusicBySmsId" resultType="SmsMusic">
+	        select * from t_sms_music where sms_id=#{sms_id}   
+	    </select>
+	    
+	    <!-- 收听人回信录入 -->
+	    <update id="updateSmsMusicByLetter" parameterType="SmsMusic" >
+	        update t_sms_music set letter=#{letter} where sms_id=#{sms_id}    
+	    </update>
+	    
+	</mapper>
+

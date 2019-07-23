@@ -1,0 +1,7 @@
+/* 全局通用样式 */
+::-webkit-scrollbar /* 定义滚动条样式 */
+		{
+		    width: 0px;
+		    height: 0px;
+		    background-color: #F5F5F5;
+		}

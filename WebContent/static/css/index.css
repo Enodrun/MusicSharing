@@ -1,0 +1,180 @@
+/*主页*/
+body{
+	background-image:url();
+	background-size:cover
+}
+/*导航栏*/
+#navigator{
+	float: left;
+	width: 100%;
+	height: 50px;
+}
+	#navigator li{
+		list-style-type: none;
+		float: left;
+		line-height:50px;
+	}
+		#navigator li a{
+			text-decoration: none;
+			font-size:large;
+			padding:10px;
+			color:white;
+			background-color:rgb(70,130,180,0.5);
+			overflow:hidden;
+		}
+		#navigator li a:hover{
+			color:#000000;
+			background-color:rgb(224,255,255,1);
+		}
+			#navigator li a:active{
+			color:yellow;
+			background-color:rgb(255,99,71,0.5);
+		}
+#footer{
+	position: absolute;
+	bottom: 0px;
+	width: 100%
+}	
+	 #audioindex{
+		width: 100%;
+		height: 40px;
+		margin-bottom:2px;
+		opacity: 0.8;
+	} 
+
+
+
+/*遮罩层*/
+#mask{
+       position:absolute;
+       left:0;
+       top:0;
+       width:100%;
+       height:100%;
+       z-index:10000;
+       background-color:gray;
+       opacity: 0.6;
+       display:none;
+   }
+/*登录框*/
+#login{
+		position:absolute;
+		z-index:10001;
+		background-color:white;
+		display:none;
+}
+
+/*注册框*/
+#register{
+		position:absolute;
+		z-index:10001;
+		background-color:white;
+		display:none;
+}
+/*功能模块显示区域*/
+#area{
+       position:absolute;
+       left:0;
+       top:20px;
+       background-color:rgb(0,0,0,0.5);
+/*       background:rgba(0, 0, 0, 1);*/
+       /*opacity: 0.5;*/
+       display:none;
+   }
+/*功能模块关闭按钮*/
+#areaClose{
+      /* background-color:blue;*/
+      text-align: right;
+       opacity: 1;
+   }
+/*音乐播放区域*/
+#playArea{
+	position:absolute;
+	background-color:rgb(0,0,0,0.5);
+	color: white;
+	/*       background:rgba(0, 0, 0, 1);*/
+	/*opacity: 0.5;*/
+	display:none
+}
+/*私信编辑区域*/
+#letterArea{
+	position:absolute;
+	background-color:black;
+	background:rgba(0, 0, 0, 0.6);
+	/*opacity: 0.5;*/
+	color:white;
+	display:none
+}
+	#letterArea span{
+	margin: 10px;
+	color: white;
+	margin: 10px;
+	float: left;
+}
+	#letterArea textarea{
+	margin: 10px;
+	width:95%;
+	height: 60%;
+	text-indent: 2em;
+	background:rgba(0, 0, 0, 0.8);
+}
+	#letterArea button{
+	margin: 10px;
+	width: 50px;
+	height: 30px;
+	background-color: black;
+	color: white;
+	float: right;
+}
+/*头像选择区域*/
+#headPictureArea{
+	position:absolute;
+	background-color:black;
+	background:rgba(0, 0, 0, 0.5);
+	/*opacity: 0.5;*/
+	color:blue;
+	display:none;
+	overflow: scroll;
+}
+	#headPictureArea img{
+		width: 100px;
+		height: 100px;
+		margin: 20px;
+	}
+/*信箱*/
+{
+	text-indent: 2em;
+}
+/*关闭按钮*/
+.closeButton{
+	background-color:rgb(0,0,0,0.5);
+	width: 100%;
+	height: 50px;
+}
+.show{
+	float:left;
+	width: 180px;
+	height: 180px;
+	background-color:black;
+}
+
+/*音乐播放区域内格式*/
+#playArea div{
+	float: left;
+}
+	#cover{
+		width: 200px;
+		height: 200px;
+		background-color: gray;
+	}
+	#lyric{
+		width: 400px;
+		height: 200px;
+		background-color: pink;
+	}
+	#comment{
+		margin-left: 100px;
+		margin-top: 10px;
+		overflow: scroll;
+		background-color: pink;
+	}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.lee.mapper.CommentMapper">
+	    
+	    <!--新增一条评论-->
+	    <insert id="addComment" parameterType="Comment" >
+	        insert into t_comment values(null,#{fk_user_id},#{fk_music_id},now(),#{content},#{status})    
+	    </insert>
+	    <!-- 根据歌曲id查询评论列表 -->
+	    <select id="listCommentByMusic" resultType="Comment">
+	        select * from t_comment where fk_music_id=#{fk_music_id} ORDER BY comment_id DESC     
+	    </select>
+	    <!-- 根据举报状态查询评论列表 -->
+	    <select id="listCommentByStatus" resultType="Comment">
+	        select * from t_comment where status=#{status}      
+	    </select>
+	    <!-- 删除单条评论 -->
+	    <delete id="deleteCommentInOne" parameterType="Comment" >
+	        delete from t_comment where comment_id= #{comment_id}   
+	    </delete>
+	    <!-- 删除某个用户的评论 -->
+	    <delete id="deleteCommentInUser" parameterType="User" >
+	        delete from t_comment where fk_user_id= #{fk_user_id}   
+	    </delete>
+	    <!-- 更新某个评论为正常 -->
+	    <update id="updateCommentStatus" parameterType="Comment" >
+	        update t_comment set status=#{status} where comment_id=#{comment_id}    
+	    </update>
+	    
+	</mapper>
+

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.lee.mapper.MusicMapper">
+	    
+	    <!--音乐上传-->
+	    <insert id="addMusic" parameterType="Music" >
+	        insert into t_music(name, file,cover,fk_user_id,likes,words) values(#{name},#{file},#{cover},#{fk_user_id},#{likes},#{words})    
+	    </insert>
+	    
+	    <!-- 网站首页歌曲列表-->
+	    <select id="listMusicByPage" resultType="Music">
+	        select * from   t_music order by music_id desc     
+	        <if test="start!=null and count!=null">
+                    limit #{start},#{count}
+            </if>
+	    </select>
+	    
+	    <!-- 根据歌曲ID查询某一首歌 -->
+	    <select id="selectMusicById" parameterType="int" resultType="Music">
+	        select * from  t_music  where music_id= #{music_id}    
+	    </select>
+	    
+	    <!-- 查询上传者个人列表 -->
+	    <select id="listMusicByUser" parameterType="User" resultType="Music">
+	        select * from  t_music  where fk_user_id= #{user_id}    
+	    </select>
+	    
+	    <!-- 删除音乐 -->
+	    <delete id="deleteMusicById" parameterType="int" >
+	        delete from t_music where music_id= #{music_id}   
+	    </delete>
+	    
+	    <!-- 修改likes的值+1, -->
+	    <update id="updateMusicInLikes" parameterType="Music">
+	        update t_music set likes=likes+1 where music_id=#{music_id}    
+	    </update>
+	    
+	    <!-- 返回音乐的likes总数 -->
+	    <select id="selectLikesByMusicId" parameterType="Music" resultType="int">
+	        select likes from  t_music  where music_id= #{music_id}    
+	    </select>
+	    
+	    <!-- 返回总音乐条数 -->
+	    <select id="totalMusic" resultType="int">
+	        select count(*) from   t_music      
+	    </select>
+	</mapper>
+

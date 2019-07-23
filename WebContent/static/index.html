@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HOME</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="UI/js/jquery/2.0.0/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="UI/css/bootstrap/3.3.6/bootstrap.min.css">
+	<!-- UI样式 -->
+		<link rel="stylesheet" type="text/css" href="css/whole.css">
+		<link rel="stylesheet" type="text/css" href="css/index.css">
+		<link rel="stylesheet" type="text/css" href="css/comment.css">
+		<link rel="stylesheet" type="text/css" href="css/letter.css">
+		<link rel="stylesheet" type="text/css" href="css/registerAndLogin.css">
+		<link rel="stylesheet" type="text/css" href="css/smsMusic.css">
+		<link rel="stylesheet" type="text/css" href="css/user.css">	
+	<script type="text/javascript" src="UI/js/bootstrap/3.3.6/bootstrap.min.js"></script>
+	
+</head>
+
+<body id="body">
+	
+	<div id="background">
+		<!-- 导航栏、功能区域 -->
+		<div id="nav"><!-- 导航栏 -->
+			<div id="navigator">
+				<li><a href="#" onclick="openLogin(400,250)">登录</a></li>
+				<li><a href="#" onclick="openRegister(400,350)">注册</a></li>
+				<li><a id="skin" href="#" onclick="setBackGround(13)">skin</a></li><!-- 更换皮肤 -->
+				<li><a id="shareUpload" href="#" onclick="shareUpload(this.id)">点播分享</a></li><!-- 短信点播 -->
+				<li><a id="toUpLoad" href="#" onclick="toUpLoad(this.id)">上传音乐</a></li><!--上传音乐-->
+				<li><a href="#" onclick="openArea(400,20)">功能区域</a></li>						
+				<li><a href="#" onclick="selectMusicByPageRandom(18)">切换列表</a></li>
+				<li><a href="#" onclick="closeselectMusicByPageRandomArea()">关闭列表</a></li>
+				<li><a href="#" onclick="openselectMusicByPageRandomArea()">打开列表</a></li>
+				<!-- 收藏或者取消收藏 -->
+				<li><a id="like" href="#" name="music_id" onclick="likeAndDislike(this.name)">收藏</a></li>
+				<li><a id="titleindex" href="#" onclick="openPlayArea(800,500)">音乐标题</a></li>
+				<li><a href="#" onclick="test()">毕设演示</a></li>
+			</div>
+
+			<div id="footer">
+				<audio id="audioindex" src="" controls="controls" autoplay="autoplay" loop="loop">浏览器不支持此标签</audio>
+			</div>
+			<!-- 切换列表 -->
+			<!-- <a href="#" onclick="selectMusicByPage()">切换列表</a> V-1-->
+			<!-- <a href="#" onclick="selectMusicByPageRandom(15)">L</a>V-2
+			<a href="#" onclick="selectMusicByPageRandom(28)">M</a>
+			<a href="#" onclick="selectMusicByPageRandom(45)">S</a> -->
+			
+			
+		</div>
+		<!-- 音乐列表区域，根据likes控制封面的大小，因为效果不好看，暂停使用 -->
+		<div id="content">	
+		</div>
+		<!-- 音乐列表展示区域，封面大小相等，后续可以增加根据likes的数量控制封面的透明度 -->
+		<div id="selectMusicByPageRandomArea">
+				<!-- <div><div style="margin:auto x" onclick="sendId()" onmousemove="dark(this.style)" onmouseleave="reColor(this.style)"><img src="" width="" height=""></div></div> -->
+		</div>
+
+		<div id="QRCode" style=" display: none;position: absolute;z-index: 30000"><img src="images/QRimg/-159876272.png" id="QRCodeImg" style="width: 200px;height: 200px;position: absolute;z-index: 30000"></div>
+<!-- 功能模块 -->
+		<div id="mask" onclick="closeMask()"></div><!-- 遮罩层 -->
+		
+		<div id="area" style="overflow: scroll;">
+			<div id="areaClose" onclick="closeArea()"><button class="btn btn-primary" style="width: 100%;">关闭</button></div>
+			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" >
+<!-- 个人账户 -->
+			<div class="panel panel-default" style="background-color: transparent;border: none">
+			    <div class="panel-heading" role="tab" id="headingThree" style="background-color: transparent;">
+			      <h4 class="panel-title">
+			        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" onclick="showUserInfo()">
+			          <button class="btn btn-info">个人账户</button>
+			        </a>
+			      </h4>
+			    </div>
+
+			    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" >
+			        <div class="panel-body" style="border: none">
+								<div style="padding:0px 50px 20px 50px;">										    
+												<span class="text-primary"><h3 style="color: white">我的资料</h3></span><br>
+												<span class="text-primary" style=" float: left;color: white;">头像</span><br><br>
+												<div class="img-thumbnail" style="float: right;"><img id="myHeadPicture" src="images/head/1.jpg" width="150px" height="150px" onclick="openHeadPictureArea(600,400)"></div>
+												<br>
+												<div style="clear: right;"></div>
+												<span class="text-primary" style="color: white">昵称</span>
+												<input type="text" class="form-control" id="nick_name">
+												<br>	
+												<span class="text-primary" style="color: white">邮箱</span>
+												<input type="text" class="form-control" id="mail">
+												<br><br>						
+												<button class="btn btn-primary" style="float: right; " onclick="updateUserByPath();showUserInfo()">修改</button>
+												<!-- <button class="btn btn-default" style="float: right;margin-right:10px">编辑</button> -->
+								</div>	
+			      	</div>
+			    </div>
+			</div>
+
+<!-- 收件箱 -->
+			<div class="panel panel-default" style="background-color: transparent;border: none">
+			    <div class="panel-heading" role="tab" id="headingFour" style="background-color: transparent;">
+			      <h4 class="panel-title">
+			        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour" onclick="selectLetterByReceiveMan()">
+			          <button class="btn btn-info">收件信箱</button>
+			        </a>
+			      </h4>
+			    </div>
+
+			    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+			        <div class="panel-body" style="border: none">
+								<div style="padding: 10px;color: white;font-size: 16px;" id="letterReadArea">
+									
+								</div>	
+			      	</div>
+			    </div>
+			</div>
+
+<!-- 发件箱 -->
+			<div class="panel panel-default" style="background-color: transparent;border: none"> 
+			    <div class="panel-heading" role="tab" id="headingFive" style="background-color: transparent;">
+			      <h4 class="panel-title">
+			        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive" onclick="selectLetterBySend()">
+			          <button class="btn btn-info">发件信箱</button>
+			        </a>
+			      </h4>
+			    </div>
+
+			    <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+			        <div class="panel-body" style="border: none">
+								<div style="padding: 10px;color: white;font-size: 16px;" id="sendReadArea">
+											    <div>
+								       				<p>日期：<span>2019-3-17 00:41:22</span></p>
+								       				<p>发给：<span>李国超</span></p>
+								       				<p style="text-indent: 2em">
+														
+													</p>
+								       			</div>	
+								</div>	
+			      	</div>
+			    </div>
+			</div>
+
+<!-- 历史点播 -->
+			<div class="panel panel-default" style="background-color: transparent;border: none">
+			    <div class="panel-heading" role="tab" id="headingSix" style="background-color: transparent;">
+			      <h4 class="panel-title">
+			        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix" onclick="listSmsMusicToPlay()">
+			          <button class="btn btn-info">历史点播</button>
+			        </a>
+			      </h4>
+			    </div>
+
+			    <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+			        <div class="panel-body" style="border: none">
+								<div style="padding: 10px;color: white;font-size: 16px;overflow: scroll;" id="smsMusicInfoArea">
+											    <div>
+									   				<p>日期：<span>2019-3-17 00:41:22</span></p>
+									   				<p>来自：<span>李国超</span></p>
+									   				<p style="text-indent: 2em">
+														
+													</p>
+									   			</div>	
+								</div>	
+			      	</div>
+			    </div>
+			</div>
+
+<!-- 收藏列表 -->
+			<div class="panel panel-default" style="background-color: transparent;border: none">
+			    <div class="panel-heading" role="tab" id="headingSeven" style="background-color: transparent;">
+			      <h4 class="panel-title">
+			        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven" onclick="listMusicByOne()">
+			          <button class="btn btn-info">收藏列表</button>
+			        </a>
+			      </h4>
+			    </div>
+
+			    <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+			        <div class="panel-body" style="border: none">
+								<div style="padding: 10px;color: white;font-size: 16px;">
+											<table class="table table-bordered table-hover  table-condensed" style="background-color: black">
+												<thead style="background-color: black">
+												 <th class="bg-info" style="text-align: center;background-color: black"><span>歌曲名</span></th>
+												 <th class="bg-info" style="text-align: center;background-color: black"><span>热度</span></th>
+												 <th class="bg-info" style="text-align: center;background-color: black"><span>取消</span></th>
+												</thead>
+												<tbody id="listMusicByOneArea" style="background-color: black">
+												<tr>
+												    <td><span class="text-primary"></span></td>  
+												    <td><span class="text-primary"></span></td>   
+												    <td><span class="text-primary"></span></td>    
+												</tr>
+												</tbody>
+											</table>
+								</div>	
+			      	</div>
+			    </div>
+			</div>
+
+<!-- 上传列表 -->
+			<div class="panel panel-default" style="background-color: transparent;border: none">
+			    <div class="panel-heading" role="tab" id="headingEight" style="background-color: transparent;">
+			      <h4 class="panel-title">
+			        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseEight" aria-expanded="false" aria-controls="collapseEight" onclick="listMusicByUserId()">
+			          <button class="btn btn-info">上传列表</button>
+			        </a>
+			      </h4>
+			    </div>
+
+			    <div id="collapseEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEight">
+			        <div class="panel-body" style="border: none">
+								<div style="padding: 10px;color: white;font-size: 16px;">
+											    <table class="table table-bordered table-hover  table-condensed" style="background-color: black">
+													<thead>
+														<th class="bg-info" style="text-align: center;background-color: black"><span>歌曲名</span></th>
+														<th class="bg-info" style="text-align: center;background-color: black"><span>收藏</span></th>
+														<th class="bg-info" style="text-align: center;background-color: black"><span>删除</span></th>
+													</thead>
+													<tbody id="listMusicByUserIdArea" style="color:black;text-align: center;">
+														<tr>
+															<td><span class="text-primary"></span></td>  
+															<td><span class="text-primary"></span></td>   
+															<td><span class="text-primary"></span></td>    
+														</tr>
+													</tbody>
+												</table>
+								</div>	
+			      	</div>
+			    </div>
+			</div>
+
+<!-- 点播列表 -->
+			<div class="panel panel-default" style="background-color: transparent;border: none">
+			    <div class="panel-heading" role="tab" id="headingNine" style="background-color: transparent;">
+			      <h4 class="panel-title">
+			        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine" onclick="listSmsMusicToPlay()">
+			          <button class="btn btn-info">点播列表</button>
+			        </a>
+			      </h4>
+			    </div>
+
+			    <div id="collapseNine" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingNine">
+			        <div class="panel-body" style="border: none">
+								<div style="padding:10px;color: white;font-size: 16px;">
+											    <table class="table table-bordered table-hover  table-condensed" style="background-color: black">
+													<thead>
+														<th class="bg-info" style="text-align: center;background-color: black"><span>歌曲</span></th>
+														<th class="bg-info" style="text-align: center;background-color: black"><span>跳转</span></th>
+														<th class="bg-info" style="text-align: center;background-color: black"><span>分享</span></th>
+													</thead>
+													<tbody id="smsMusicListArea" style="color:black;text-align: center;">
+														<tr>
+															<td><span class="text-primary"></span></td>  
+															<td><span class="text-primary"></span></td>   
+															<td><span class="text-primary"></span></td>    
+														</tr>
+													</tbody>
+												</table>
+								</div>	
+			      	</div>
+			    </div>
+			</div>
+
+		</div>
+		</div>
+<!-- 登录 -->
+		<div id="login" style="padding: 50px 50px 50px 50px;border-radius:10px;background-color: rgb(0,0,0,0);border: 1px solid white">
+			<form class="bs-example bs-example-form" role="form">
+		        <div class="input-group input-group-lg">
+		            <span class="input-group-addon">账号</span>
+		            <input type="text" class="form-control" placeholder="如：张三" id="lname">
+		        </div>
+		        <br>
+		        <div class="input-group input-group-lg">
+		            <span class="input-group-addon">密码</span>
+		            <input type="password" class="form-control" placeholder="password" id="lpassword">
+		        </div>
+		        <br>
+		        <button class="btn btn-info btn-lg" type="button" onclick="loginService()" style="float: right;">登&nbsp;&nbsp;录</button><br>
+		        <br>
+		    </form>
+		</div><!-- 登录 -->
+<!-- 注册 -->
+		<div id="register" style="padding: 50px;border-radius:10px;background-color: rgb(0,0,0,0);border: 1px solid white">
+			<!-- <span class="text-primary">注册页</span> -->
+			<form class="bs-example bs-example-form" role="form">
+		        <div class="input-group input-group-lg">
+		            <span class="input-group-addon">注册账号</span>
+		            <input type="text" class="form-control" placeholder="如：张三" id="rname" onblur="ifNameExist(this.value)">
+		        </div>
+		        <br>
+		        <div class="input-group input-group-lg">
+		            <span class="input-group-addon">输入密码</span>
+		            <input type="password" class="form-control" placeholder="password" id="rpassword">
+		        </div>
+		        <br>
+		        <div class="input-group input-group-lg">
+		            <span class="input-group-addon">再次输入</span>
+		            <input type="password" class="form-control" placeholder="password" id="rcpassword">
+		        </div>
+		        <br>
+		        <button class="btn btn-info btn-lg" type="button" onclick="registerService()" style="float: right;">注&nbsp;&nbsp;册</button><br>
+		        <br>
+		        <!-- <div>提示区域：<span id="tipspassword"></span></div> -->
+		    </form>			
+		</div><!-- 注册 -->
+<!-- 音乐播放区域 -->		
+		<div id="playArea" style="background-color:rgb(0,0,0,0.5);position: absolute;">
+			<div class="closeButton" style="float: left;,width: 100%;height: 50px;">
+				<button style="background-color:black;border:none;font-size:18px;width:100px;height: 100%;float: right;" onclick="closePlayArea()">关闭</button>
+				<img style="float: left;width: 50px;height: 50px" src="" id="uploadPersonPlayImg"><!-- 上传用户头像 -->
+				<span style="float: left;margin: 10px;" id="uploadPersonPlay" onclick="openLetterArea(400,400,document.getElementById('uploadPersonPlayId').innerHTML)"></span><!-- 用户名 -->
+				<span style="float:left;margin:10px">likes:</span><span style="float: left;margin: 10px;" id="likesPlay"></span><!-- 收藏数量 -->
+				<span style="float: left;margin: 10px;" id="titlePlay"></span><!-- 歌曲名 -->
+				<span id="uploadPersonPlayId" style="display: none;"></span><!-- 用户ID -->
+				<span id="music_idPlay" style="display: none;"></span><!-- 歌曲music_id -->
+			</div>
+			<div id="cover" style="float: left;margin: 10px;border: 1px solid black"><!-- 封面 -->
+				<img src="" id="coverindex" style="width: 200px;height: 200px">
+			</div>
+			<div id="lyric" style="float: right;width: 570px;height: 200px;margin:5px;overflow: scroll;background-color: transparent;" ><!-- 歌词 -->
+				<p id="wordsindex"></p>
+			</div>
+			
+			<div style="float:right;width:40%;height: 230px;margin: 5px;">
+				<textarea id="commentContent" rows="5" cols="10" style="text-indent:2em;width: 100%;height: 200px;background-color: transparent;"></textarea>
+				<button  style="background-color:black ;width: 100%;height: 25px;color:white;" onclick="writeAComment(document.getElementById('music_idPlay').innerHTML)">发表评论</button>
+			</div>
+			<div id="comment" style="float:left;width: 57%;height:220px;margin:5px;background-color: transparent;overflow: scroll;color: white"><!-- 评论 -->
+				<div id=""><!-- id为comment_id -->
+					<img src=""><!-- 头像 -->
+			    	<span></span><!-- 姓名 -->
+			    	<span></span><!-- 时间 -->
+			    	<p></p><!-- 评论内容 -->
+			    	<a id="" href="#" onclick="openLetterArea(400,400,this.id)">私信</a><!-- id为评论人的user_id -->
+			    	<a id="" href="#" onclick="reportComment(this.id)">举报</a><!-- id为该评论的comment_id -->
+				</div>				
+			</div>
+		</div><!-- 音乐播放区域 -->
+		<div id="letterArea"><!-- 私信编辑区域 -->
+			<span>To:</span><span></span><!-- 收件人 -->
+			<span>From:</span><span></span><!-- 发件人 -->
+			<span></span><!-- 当前时间 -->
+			<textarea rows="10" cols="10"></textarea><!-- 内容 -->
+			<button onclick="addLetter(this.name,this.parentNode.children[5].value)">发送</button><!-- 调用ajax添加一条信息记录 -->
+			<button onclick="this.parentNode.style.display='none'">关闭</button>
+		</div><!-- 私信编辑区域 -->
+		<div id="headPictureArea">
+			<img src="images/head/1.jpg" onclick="document.getElementById('showHead').src=this.src">
+			<img src="images/head/2.jpg" onclick="document.getElementById('showHead').src=this.src">
+			<img src="images/head/3.jpg" onclick="document.getElementById('showHead').src=this.src">
+			<img src="images/head/4.jpg" onclick="document.getElementById('showHead').src=this.src">
+			<img src="images/head/5.jpg" onclick="document.getElementById('showHead').src=this.src">
+			<img src="images/head/6.jpg" onclick="document.getElementById('showHead').src=this.src">
+			<img src="images/head/7.jpg" onclick="document.getElementById('showHead').src=this.src">
+			<img src="images/head/8.jpg" onclick="document.getElementById('showHead').src=this.src">
+			<img src="images/head/9.jpg" onclick="document.getElementById('showHead').src=this.src">
+			<img src="images/head/10.jpg" onclick="document.getElementById('showHead').src=this.src">
+			<img src="images/head/11.jpg" onclick="document.getElementById('showHead').src=this.src">
+			<img id="showHead" style="border: 5px solid white;border-radius: 5px">
+			<div style="text-align: center">		
+			<button class="btn btn-primary" style="width:100%" onclick="setHeadPicture(document.getElementById('showHead').src);this.parentNode.parentNode.style.display='none'">确定</button><!-- 函数在user.jss里定义 -->
+			</div>
+		</div><!-- 用户头像选择区域 -->
+				<div id="info"></div><!-- 点播信息 -->
+				<div id="list"></div><!-- 我的音乐 -->
+	</div>
+</body>
+	
+	<!-- 数据交互 -->
+	<script type="text/javascript" src="js/controller/comment.js"></script>
+	<script type="text/javascript" src="js/controller/letter.js"></script>
+	<script type="text/javascript" src="js/controller/like.js"></script>
+	<script type="text/javascript" src="js/controller/music.js"></script>
+	<script type="text/javascript" src="js/controller/registerAndLogin.js"></script>
+	<script type="text/javascript" src="js/controller/smsMusic.js"></script>
+	<script type="text/javascript" src="js/controller/user.js"></script>
+	<!-- 逻辑操作 -->	
+	<script type="text/javascript" src="js/service/comment.js"></script>
+	<script type="text/javascript" src="js/service/letter.js"></script>
+	<script type="text/javascript" src="js/service/like.js"></script>
+	<script type="text/javascript" src="js/service/music.js"></script>
+	<script type="text/javascript" src="js/service/registerAndLogin.js"></script>
+	<script type="text/javascript" src="js/service/smsMusic.js"></script>
+	<script type="text/javascript" src="js/service/user.js"></script>
+	<script type="text/javascript" src="js/service/index.js"></script>
+	<!-- 首页音乐列表 -->
+	<script type="text/javascript" src="js/index_music.js"></script>
+
+	<script type="text/javascript">
+		/* sessionStorage.setItem("user_id",39)//假装已登录放入token值方便测试 */
+		function test() {
+			var content=document.getElementById("commentContent")
+			content.value=null;
+			content.value="这首歌让我想起了，六月的海大，楼顶的星河,当然还有那些曾经没有空调的日子。"
+		}
+	</script>
+</html>

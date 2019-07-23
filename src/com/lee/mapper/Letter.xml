@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.lee.mapper.LetterMapper">
+	    
+	    <!--发送私信，写入数据库-->
+	    <insert id="addLetter" parameterType="Letter" >
+	        insert into t_letter(fk_user_send,fk_user_receive,datetime,content) values(#{fk_user_send},#{fk_user_receive},now(),#{content})    
+	    </insert>
+	    <!-- 根据账发送人和接收人查看信息列表-->
+	    <select id="selectLetterBySend" resultType="Letter">
+	        select * from t_letter where fk_user_send=#{user_id} order by letter_id desc   
+	    </select>
+	    <select id="selectLetterByReceive" resultType="Letter">
+	        select * from t_letter where fk_user_receive=#{user_id} order by letter_id desc     
+	    </select>
+	    
+	</mapper>
+
