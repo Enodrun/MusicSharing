@@ -1,27 +1,4 @@
 //与用户相关的数据交互方法
-//案例
-function example(){
-	console.log("addComment:")//1.标识函数，方便调试
-	var token=sessionStorage.getItem("token")//2.取值、转换成json字串
-	var data={
-		"token":token
-	}
-	var url="/MusicSharing/selectCommentByMusicId"
-
-
-
-	$.ajax({								//3.编写ajax请求
-		type:"post",
-		url:url,
-		data:JSON.stringify(data),
-		dataType:"json",
-		contentType:"application/json;charset=UTF-8",
-		success:function(res){
- 			alert(res)//4.测试查看返回值
- 		}
-	})
-}
-
 //查看用户的全部信息
 function getUserAll(user_id){
 	console.log("getUserAll:")//1.标识函数，方便调试
